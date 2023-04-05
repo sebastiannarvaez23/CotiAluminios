@@ -1,0 +1,18 @@
+.contain-title-form {
+    text-align: center;
+    height: 3vh;
+    margin-top: 2vh;
+}
+
+.content-form-price {
+    width: 50%;
+    height: 65vh;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6vh;
+}
+
+button {
+    width: 100% !important;
+    margin-top: 3vh !important;
+}
