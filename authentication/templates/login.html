@@ -3,15 +3,25 @@
 
 {% block content %}
 <div class="contain-login">
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <label for="inputPassword5" class="form-label">Password</label>
-    <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
-    <div id="passwordHelpBlock" class="form-text">
-        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special
-        characters, or emoji.
-    </div>
+
+    <h1>Inicio de Sesión Coti Aluminios</h1>
+    <form>
+        <label for="inputUser5" class="form-label">Usuario</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1"
+                id="inputUser5">
+        </div>
+        <label for="inputPassword5" class="form-label">Password</label>
+        <input type="password" id="inputPassword5" class="form-control" aria-labelledby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+            Su contraseña debe tener entre 8 y 20 caracteres, contener letras y números, y no debe contener espacios,
+            especiales
+            personajes o emoji.
+        </div>
+
+        <button type="submit" class="btn btn-outline-primary">Iniciar sesión</button>
+    </form>
+    <button type="button" class="btn btn-outline-primary">Olvidé mi contraseña</button>
 </div>
 {% endblock content %}
