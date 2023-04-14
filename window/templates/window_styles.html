@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="contain-styles-window">
+  <h1>Estilos de Ventana</h1>
+  <div class="list-window-styles">
+    <div class="contain-table">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if styles_window %}
+          {% for style in styles_window %}
+          <tr>
+            <td colspan="1">{{style.id}}</td>
+            <td colspan="1">{{style.name}}</td>
+            <td colspan="1">{{style.price}}</td>
+            <td colspan="1"><i class='bx bx-pencil'></i></td>
+            <td colspan="1"><i class='bx bx-trash'></i></td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <tr><h1>Sin informacion de estilos de ventana.</h1></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-primary">Agregar estilo</button>
+  </div>
+  <div class="btn-add-style-window">
+  </div>
+</div>
+
+{% endblock content %}
