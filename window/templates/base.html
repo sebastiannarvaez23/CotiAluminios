@@ -30,13 +30,13 @@
     <ul class="nav nav-tabs ml-auto">
       {% if user.is_authenticated == False %}
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Cotizar ventana</a>
+        <a class="nav-link {% if request.path == '/window/' %} active {% endif %}" aria-current="page" href="{% url 'quote' %}">Cotizar ventana</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Estilos Ventana</a>
+        <a class="nav-link {% if request.path == '/window/styles/' %} active {% endif %}" href="{% url 'windowstyles' %}">Estilos Ventana</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Acabados Aluminio</a>
+        <a class="nav-link {% if request.path == '/window/aluminum/' %} active {% endif %}" href="{% url 'aluminumfinishes' %}">Acabados Aluminio</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Tipos de vidrio</a>

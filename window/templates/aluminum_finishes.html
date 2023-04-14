@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="contain-elements-window">
-  <h1>Estilos de Ventana</h1>
+  <h1>Acabados en Aluminio</h1>
   <div class="list-elements-window">
     <div class="contain-table">
       <table class="table table-sm">
@@ -19,23 +19,23 @@
           </tr>
         </thead>
         <tbody>
-          {% if styles_window %}
-          {% for style in styles_window %}
+          {% if aluminum_finishes %}
+          {% for aluminum in aluminum_finishes %}
           <tr>
-            <td colspan="1">{{style.id}}</td>
-            <td colspan="1">{{style.name}}</td>
-            <td colspan="1">{{style.price}}</td>
+            <td colspan="1">{{aluminum.id}}</td>
+            <td colspan="1">{{aluminum.name}}</td>
+            <td colspan="1">{{aluminum.price}}</td>
             <td colspan="1"><i class='bx bx-pencil'></i></td>
             <td colspan="1"><i class='bx bx-trash'></i></td>
           </tr>
           {% endfor %}
           {% else %}
-          <tr><h1>Sin informacion de estilos de ventana.</h1></tr>
+          <tr><h1>Sin informacion de acabados en aluminio.</h1></tr>
           {% endif %}
         </tbody>
       </table>
     </div>
-    <button class="btn btn-primary">Agregar estilo</button>
+    <button class="btn btn-primary">Agregar aluminio</button>
   </div>
   <div class="btn-add-style-window">
   </div>

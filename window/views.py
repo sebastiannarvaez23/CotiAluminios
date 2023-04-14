@@ -11,7 +11,7 @@ from .models import (
 )
 
 # Create your views here.
-class QuoteWindow(TemplateView):
+class QuoteWindowTemplateView(TemplateView):
     """Class QuoteWindow"""
     template_name = "window_quote.html"
 
@@ -22,12 +22,20 @@ class QuoteWindow(TemplateView):
         context['glass_type'] = GlassType.objects.all()
         return context
     
-class StylesWindow(TemplateView):
+class StylesWindowTemplateView(TemplateView):
     template_name = "window_styles.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['styles_window'] = StyleWindow.objects.all()
+        return context
+    
+class AluminumFinishesTemplateView(TemplateView):
+    template_name = "aluminum_finishes.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['aluminum_finishes'] = AluminumFinishes.objects.all()
         return context
 
 @csrf_exempt
