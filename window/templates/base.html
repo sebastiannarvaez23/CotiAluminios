@@ -28,7 +28,7 @@
 
   <div class="header-options">
     <ul class="nav nav-tabs ml-auto">
-      {% if user.is_authenticated == False %}
+      {% if user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link {% if request.path == '/window/' %} active {% endif %}" aria-current="page" href="{% url 'quote' %}">Cotizar ventana</a>
       </li>
@@ -48,6 +48,10 @@
       {% if user.is_authenticated == False %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'login' %}">Login</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Cerrar sesión</a>
       </li>
       {% endif %}
     </ul>

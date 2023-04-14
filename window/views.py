@@ -1,6 +1,8 @@
 # Python
 import json
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView
@@ -11,41 +13,6 @@ from .models import (
 )
 
 # Create your views here.
-class QuoteWindowTemplateView(TemplateView):
-    """Class QuoteWindow"""
-    template_name = "window_quote.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['style_window'] = StyleWindow.objects.all()
-        context['aluminum_finishes'] = AluminumFinishes.objects.all()
-        context['glass_type'] = GlassType.objects.all()
-        return context
-    
-class StylesWindowTemplateView(TemplateView):
-    template_name = "window_styles.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['styles_window'] = StyleWindow.objects.all()
-        return context
-    
-class AluminumFinishesTemplateView(TemplateView):
-    template_name = "aluminum_finishes.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['aluminum_finishes'] = AluminumFinishes.objects.all()
-        return context
-
-class GlassTypeTemplateView(TemplateView):
-    template_name = "glass_type.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['glasses_types'] = GlassType.objects.all()
-        return context
-
 @csrf_exempt
 def getQuoteWindow(request):
 
@@ -86,3 +53,41 @@ def getQuoteWindow(request):
         floCostoTotal = floCostoTotal*(1-0.1)
 
     return JsonResponse({'result': floCostoTotal})
+ 
+class QuoteWindowTemplateView(TemplateView):
+    """Class QuoteWindow"""
+    template_name = "window_quote.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['style_window'] = StyleWindow.objects.all()
+        context['aluminum_finishes'] = AluminumFinishes.objects.all()
+        context['glass_type'] = GlassType.objects.all()
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class StylesWindowTemplateView(TemplateView):
+    template_name = "window_styles.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['styles_window'] = StyleWindow.objects.all()
+        return context
+
+@method_decorator(login_required, name='dispatch') 
+class AluminumFinishesTemplateView(TemplateView):
+    template_name = "aluminum_finishes.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['aluminum_finishes'] = AluminumFinishes.objects.all()
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class GlassTypeTemplateView(TemplateView):
+    template_name = "glass_type.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['glasses_types'] = GlassType.objects.all()
+        return context
