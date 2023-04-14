@@ -38,6 +38,14 @@ class AluminumFinishesTemplateView(TemplateView):
         context['aluminum_finishes'] = AluminumFinishes.objects.all()
         return context
 
+class GlassTypeTemplateView(TemplateView):
+    template_name = "glass_type.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['glasses_types'] = GlassType.objects.all()
+        return context
+
 @csrf_exempt
 def getQuoteWindow(request):
 

@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.QuoteWindowTemplateView.as_view(), name='quote'),
     path('styles/', views.StylesWindowTemplateView.as_view(), name="windowstyles"),
     path('aluminum/', views.AluminumFinishesTemplateView.as_view(), name="aluminumfinishes"),
+    path('glass/', views.GlassTypeTemplateView.as_view(), name="glasstype"),
     # API
     path('quote/', views.getQuoteWindow, name="windowquote"),
 ]
