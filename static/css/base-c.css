@@ -26,3 +26,13 @@ button {
     font-size: 16px;
 }
 
+.nav-item-mod:hover {
+    pointer-events: none;
+}   
+
+.welcome {
+    position: absolute;
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-left: 35%;
+}

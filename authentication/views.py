@@ -17,7 +17,7 @@ class LoginTemplateView(TemplateView):
         # Si la autenticación falla, mostrar un mensaje de error
         return render(request, self.template_name, {'error_message': 'Nombre de usuario o contraseña incorrectos'})
 
-class LogoutTemplateView(View):
+class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect(reverse('login'))
