@@ -13,6 +13,16 @@
 
 .contain-table {
     height: 60vh;
+    overflow: scroll;
+}
+
+.contain-table::-webkit-scrollbar {
+    width: 7px;
+}
+
+.contain-table::-webkit-scrollbar-thumb {
+    background: #11101d;
+    border-radius: 10px;
 }
 
 i:hover {
