@@ -1,28 +1,27 @@
-import pytest
+from django.test import TestCase
+from faker import Faker
+from .factories import user_factory
 
-@pytest.fixture
-def user_creation():
-    from django.contrib.auth.models import User
-    return User(
-        username = 'testusername',
-        email = 'test@test.com',
-        password = 'TestPass12345'
-    )
+fake = Faker()
 
-@pytest.mark.django_db
-def test_user_creation(user_creation):
-    user_creation.save()
-    assert user_creation.username == 'testusername'
+class UserTestCase(TestCase):
 
-@pytest.mark.django_db
-def test_superuser_creation(user_creation):
-    user_creation.is_superuser = True
-    user_creation.is_staff = True
-    user_creation.save()
-    assert user_creation.is_superuser
+    def setUp(self):
+        self.user = user_factory()
+    
+    def test_user_creation(self):
+        self.user.save()
+        self.assertEqual(self.user.is_active, True)
+        self.assertEqual(self.user.is_staff, False)
+        self.assertEqual(self.user.is_superuser, False)
 
-@pytest.mark.django_db
-def test_staff_user_creation(user_creation):
-    user_creation.is_staff = True
-    user_creation.save()
-    assert user_creation.is_staff
+    def test_staff_user_creation(self):
+        self.user.is_staff = True
+        self.user.save()
+        assert self.user.is_staff
+
+    def test_superuser_creation(self):
+        self.user.is_superuser = True
+        self.user.is_staff = True
+        self.user.save()
+        assert self.user.is_superuser
