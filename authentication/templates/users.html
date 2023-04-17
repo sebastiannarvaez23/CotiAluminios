@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="contain-elements-window">
+  <h1>Usuarios</h1>
+  <div class="list-elements-window">
+    <div class="contain-table">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">username</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">E-mail</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if users %}
+          {% for userm in users %}
+          <tr>
+            <td colspan="1">{{userm.id}}</td>
+            <td colspan="1">{{userm.username}}</td>
+            <td colspan="1">{{userm.first_name}}</td>
+            <td colspan="1">{{userm.last_name}}</td>
+            <td colspan="1">{{userm.email}}</td>
+            <td colspan="1"><i class='bx bx-pencil'></i></td>
+            <td colspan="1"><i class='bx bx-trash'></i></td>
+          </tr>
+          {% endfor %}
+          {% else %}
+          <tr><h1>Sin informacion de los usuarios.</h1></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <button class="btn btn-primary">Agregar Usuario</button>
+  </div>
+  <div class="btn-add-element-window">
+  </div>
+</div>
+
+{% endblock content %}

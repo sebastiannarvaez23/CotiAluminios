@@ -28,11 +28,13 @@ button {
 
 .nav-item-mod:hover {
     pointer-events: none;
-}   
+}  
 
 .welcome {
+    width: 20%;
     position: absolute;
     display: block;
     padding: 0.5rem 1rem;
-    margin-left: 35%;
+    margin-left: 24%;
+    text-align: right;
 }

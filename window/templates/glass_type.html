@@ -35,9 +35,37 @@
         </tbody>
       </table>
     </div>
-    <button class="btn btn-primary">Agregar vidrio</button>
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar vidrio</button>
   </div>
   <div class="btn-add-element-window">
+  </div>
+</div>
+
+<!-- Modal add glass type -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Tipo de Vidrio</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="element-name" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" id="element-name">
+          </div>
+          <div class="form-group">
+            <label for="element-price" class="col-form-label">Precio</label>
+            <input type="text" class="form-control" id="element-price">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar tipo de vidrio</button>
+      </div>
+    </div>
   </div>
 </div>
 

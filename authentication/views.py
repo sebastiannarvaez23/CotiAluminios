@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.views.generic.base import TemplateView, View
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -21,3 +22,11 @@ class LogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect(reverse('login'))
+
+class UsersTemplateView(TemplateView):
+    template_name = "users.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = User.objects.all()
+        return context
