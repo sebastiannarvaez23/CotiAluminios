@@ -28,3 +28,11 @@
 i:hover {
     cursor: pointer;
 }
+
+.contain-elements-confirm {
+    text-align: center;
+    margin-top: 20vh;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}

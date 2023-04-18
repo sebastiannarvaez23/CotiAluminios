@@ -46,3 +46,7 @@ class UserTestCase(TestCase):
         self.client.login(username=self.superuser.username, password='passtest1')
         response = self.client.get('/auth/users/', HTTP_X_REQUEST_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
+
+    def test_user_list_without_auth(self):
+        response = self.client.get('/auth/users/', HTTP_X_REQUEST_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 302)

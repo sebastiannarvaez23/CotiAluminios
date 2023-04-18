@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class StyleWindow(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=254, verbose_name="Nombre estilo")
+    name = models.CharField(max_length=254, unique=True, verbose_name="Nombre estilo")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio")
 
     class Meta:
@@ -16,7 +16,7 @@ class StyleWindow(models.Model):
     
 class AluminumFinishes(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=254, verbose_name="Nombre acabado")
+    name = models.CharField(max_length=254, unique=True, verbose_name="Nombre acabado")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio")
 
     class Meta:
@@ -29,7 +29,7 @@ class AluminumFinishes(models.Model):
     
 class GlassType(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=254, verbose_name="Tipo de vidrio")
+    name = models.CharField(max_length=254, unique=True, verbose_name="Tipo de vidrio")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Precio")
 
     class Meta:

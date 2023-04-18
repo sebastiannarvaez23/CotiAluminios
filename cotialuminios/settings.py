@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'window',
     'authentication',
+    'stylewindow',
+    'aluminumfinishes',
+    'glasstype',
 ]
 
 MIDDLEWARE = [
