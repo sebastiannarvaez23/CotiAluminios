@@ -11,7 +11,6 @@ class UserCommonFactory(factory.django.DjangoModelFactory):
         model = User
 
     username = fake.user_name()
-    password = fake.password()
     email = fake.email()
     is_staff = False
     is_superuser = False
@@ -22,7 +21,6 @@ class UserStaffFactory(factory.django.DjangoModelFactory):
         model = User
 
     username = fake.user_name()
-    password = fake.password()
     email = fake.email()
     is_staff = True
     is_superuser = False
@@ -33,7 +31,6 @@ class UserSuperuserFactory(factory.django.DjangoModelFactory):
         model = User
 
     username = fake.user_name()
-    password = fake.password()
     email = fake.email()
     is_staff = True
     is_superuser = True
