@@ -1,10 +1,12 @@
 import json
 
+from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from glasstype.models import GlassType
 from window.models import (
     AluminumFinishes,
+    StyleWindow
 )
 
 # Create your views here.
@@ -49,3 +51,13 @@ def getQuoteWindow(request):
 
     return JsonResponse({'result': floCostoTotal})
  
+class QuoteWindowTemplateView(TemplateView):
+    """Class QuoteWindow"""
+    template_name = "window_quote.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['style_window'] = StyleWindow.objects.all()
+        context['aluminum_finishes'] = AluminumFinishes.objects.all()
+        context['glass_type'] = GlassType.objects.all()
+        return context
