@@ -55,20 +55,20 @@
     <ul class="nav nav-tabs ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link {% if request.path == '/window/' %} active {% endif %} {% if request.path == '/' %} active {% endif %}"
+        <a class="nav-link {% if request.path == '/quote/' %} active {% endif %} {% if request.path == '/' %} active {% endif %}"
           aria-current="page" href="{% url 'quote' %}">Cotizar ventana</a>
       </li>
       {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link {% if request.path == '/window/styles/' %} active {% endif %}"
+        <a class="nav-link {% if request.path == '/style/list/' %} active {% endif %}"
           href="{% url 'windowstyles' %}">Estilos Ventana</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {% if request.path == '/window/aluminum/' %} active {% endif %}"
+        <a class="nav-link {% if request.path == '/aluminum/list/' %} active {% endif %}"
           href="{% url 'aluminumfinishes' %}">Acabados Aluminio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link {% if request.path == '/window/glass/' %} active {% endif %}"
+        <a class="nav-link {% if request.path == '/glass/list/' %} active {% endif %}"
           href="{% url 'glasstype' %}">Tipos de vidrio</a>
       </li>
       <li class="nav-item">

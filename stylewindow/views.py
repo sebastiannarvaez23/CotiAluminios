@@ -6,7 +6,6 @@ from django.views.generic.edit import CreateView, DeleteView
 from django.urls import reverse_lazy
 from .models import StyleWindow
 
-
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
 class StylesWindowTemplateView(TemplateView):

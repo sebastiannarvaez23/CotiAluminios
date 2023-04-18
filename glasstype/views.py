@@ -1,12 +1,6 @@
-import json
-
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, DeleteView
-from django.urls import reverse_lazy
 from glasstype.models import GlassType
 
 # Create your views here.
