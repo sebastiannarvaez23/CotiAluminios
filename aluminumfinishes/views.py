@@ -17,7 +17,7 @@ class AluminumFinishesTemplateView(TemplateView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class StylesWindowCreateView(CreateView):
+class AluminumFinishesCreateView(CreateView):
     model = AluminumFinishes
     template_name = "aluminum_finishes.html"
     fields = ['name', 'price']
@@ -36,7 +36,7 @@ class StylesWindowCreateView(CreateView):
         return HttpResponseRedirect(redirect_to=self.get_success_url())
 
 @method_decorator(login_required, name='dispatch')
-class StylesWindowDeleteView(DeleteView):
+class AluminumFinishesDeleteView(DeleteView):
     model = AluminumFinishes
     template_name = 'aluminum_finishes_conf_delete.html'
     success_url = reverse_lazy('aluminumfinishes')
