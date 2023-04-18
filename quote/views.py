@@ -4,10 +4,8 @@ from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from glasstype.models import GlassType
-from window.models import (
-    AluminumFinishes,
-    StyleWindow
-)
+from window.models import AluminumFinishes
+from stylewindow.models import StyleWindow
 
 # Create your views here.
 @csrf_exempt
