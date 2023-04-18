@@ -5,7 +5,7 @@ from .factories import (
     UserStaffFactory
 )
 
-class WindowTestCase(TestCase):
+class StyleWindowTestCase(TestCase):
 
     def setUp(self):
         self.client = Client()

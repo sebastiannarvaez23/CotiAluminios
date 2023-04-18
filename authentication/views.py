@@ -5,6 +5,9 @@ from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.views.generic.base import TemplateView, View
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic.edit import CreateView, DeleteView
+from django.urls import reverse_lazy
 
 class LoginTemplateView(TemplateView):
     template_name = 'login.html'
@@ -33,3 +36,41 @@ class UsersTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['users'] = User.objects.all()
         return context
+    
+@method_decorator(login_required, name='dispatch')
+class UserCreateView(CreateView):
+    model = User
+    template_name = "users.html"
+    fields = [
+        'username',
+        'first_name',
+        'last_name',
+        'email',
+    ]
+    
+    def get_success_url(self):
+        return reverse_lazy('users')
+    
+    def form_valid(self, form):
+        username = self.request.POST.get('username')
+        first_name = self.request.POST.get('firstname')
+        last_name = self.request.POST.get('lastname')
+        email = self.request.POST.get('email')
+        password = self.request.POST.get('password')
+        # Pendiente terminar esta validación
+        
+        user = User(
+            username=username,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+        )
+        user.set_password(password)
+        user.save()
+        return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'user_conf_delete.html'
+    success_url = reverse_lazy('users')

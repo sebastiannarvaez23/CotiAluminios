@@ -30,7 +30,7 @@
             <td colspan="1">{{userm.last_name}}</td>
             <td colspan="1">{{userm.email}}</td>
             <td colspan="1"><i class='bx bx-pencil'></i></td>
-            <td colspan="1"><i class='bx bx-trash'></i></td>
+            <td colspan="1"><a href="{% url 'userdelete' userm.pk %}"><i class='bx bx-trash'></i></a></td>
           </tr>
           {% endfor %}
           {% else %}
@@ -39,9 +39,55 @@
         </tbody>
       </table>
     </div>
-    <button class="btn btn-primary">Agregar Usuario</button>
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar Usuario</button>
   </div>
   <div class="btn-add-element-window">
+  </div>
+</div>
+
+
+<!-- Modal add user -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Usuario</h5>
+      </div>
+      <form method="post" action="{% url 'usercreate' %}">
+        {% csrf_token %}
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="element-name" class="col-form-label">Nombre de Usuario</label>
+          <input name="username" type="text" class="form-control" id="element-name">
+        </div>
+          <div class="form-group">
+            <label for="element-name" class="col-form-label">Nombres</label>
+            <input name="firstname" type="text" class="form-control" id="element-name">
+          </div>
+          <div class="form-group">
+            <label for="element-name" class="col-form-label">Apllidos</label>
+            <input name="lastname" type="text" class="form-control" id="element-name">
+          </div>
+          <div class="form-group">
+            <label for="element-name" class="col-form-label">E-mail</label>
+            <input name="email" type="text" class="form-control" id="element-name">
+          </div>
+          <div class="form-group">
+            <label for="element-price" class="col-form-label">Contraseña</label>
+            <input name="password" type="password" class="form-control" id="element-price">
+          </div>
+          <div class="form-group">
+            <label for="element-price" class="col-form-label">Confirmar Contraseña</label>
+            <input name="passwordconfirm" type="password" class="form-control" id="element-price">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
