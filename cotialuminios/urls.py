@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('window.urls')),
     path('window/', include('window.urls')),
     path('glass/', include('glasstype.urls')),
+    path('quote/', include('quote.urls')),
     path('auth/', include('authentication.urls')),
 ]

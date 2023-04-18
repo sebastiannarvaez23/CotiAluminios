@@ -9,5 +9,4 @@ urlpatterns = [
     path('styles/create/', views.StylesWindowCreateView.as_view(), name="windowstylescreate"),
     path('styles/delete/<int:pk>/', views.StylesWindowCreateView.as_view(), name="windowstylesdelete"),
     # API
-    path('quote/', views.getQuoteWindow, name="windowquote"),
 ]
