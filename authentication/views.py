@@ -19,7 +19,7 @@ class LoginTemplateView(TemplateView):
         if user is not None:
             login(request, user)
             # Redirigir al usuario a la página que estaba tratando de acceder
-            return redirect(request.GET.get('next', '/window/'))
+            return redirect(request.GET.get('next', '/'))
         # Si la autenticación falla, mostrar un mensaje de error
         return render(request, self.template_name, {'error_message': 'Nombre de usuario o contraseña incorrectos'})
 

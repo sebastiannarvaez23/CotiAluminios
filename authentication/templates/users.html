@@ -29,8 +29,18 @@
             <td colspan="1">{{userm.first_name}}</td>
             <td colspan="1">{{userm.last_name}}</td>
             <td colspan="1">{{userm.email}}</td>
-            <td colspan="1"><i class='bx bx-pencil'></i></td>
-            <td colspan="1"><a href="{% url 'userdelete' userm.pk %}"><i class='bx bx-trash'></i></a></td>
+            <td colspan="1">
+              {% if user.is_staff or user.username == userm.username %}
+              <i class='bx bx-pencil'></i>
+              {% endif %}
+            </td>
+            <td colspan="1">
+              {% if user.is_staff and user.username != userm.username %}
+              <a href="{% url 'userdelete' userm.pk %}">
+                <i class='bx bx-trash'></i>
+              </a>
+              {% endif %}
+            </td>
           </tr>
           {% endfor %}
           {% else %}
@@ -44,7 +54,6 @@
   <div class="btn-add-element-window">
   </div>
 </div>
-
 
 <!-- Modal add user -->
 
