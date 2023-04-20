@@ -1,3 +1,21 @@
+.principal-contain-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.list-items-quote {
+    border: rgb(187, 179, 179) 1px solid;
+    width: 90%;
+    height: 75vh;
+    padding: 16px;
+    border-radius: 16px;
+}
+
+.list-items-quote h4 {
+    text-align: center;
+}
+
 .contain-title-form {
     text-align: center;
     height: 3vh;
@@ -5,7 +23,7 @@
 }
 
 .content-form-price {
-    width: 50%;
+    width: 70%;
     height: 65vh;
     margin-left: auto;
     margin-right: auto;

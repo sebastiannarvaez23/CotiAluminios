@@ -8,71 +8,82 @@
   integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 
 <div class="contain-title-form">
-  <h1>Solicitar Cotización</h1>
+  <h2>Solicitar Cotización</h2>
 </div>
+<div class="principal-contain-grid">
+  <!-- Board Control Quote -->
+  <div class="content-form-price">
+    <div class="dimensions-window">
+      <div class="mb-3 row">
+        <label for="Ancho" class="col-sm-2 col-form-label">Ancho</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="Ancho">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label for="Alto" class="col-sm-2 col-form-label">Alto</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="Alto">
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="EstiloVentana" class="form-label">Estilo de la ventana</label>
+      <select class="form-select" aria-label="Default select example" id="estiloVentana">
+        <option value="0" selected>-
+           seleccione -</option>
+        {% for style in style_window %}
+        <option value="{{style.name}}">{{style.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="AcabadoAluminio" class="form-label">Acabado del aluminio</label>
+      <select class="form-select" aria-label="Default select example" id="AcabadoAluminio">
+        <option value="0" selected>- seleccione -</option>
+        {% for aluminium in aluminum_finishes %}
+        <option value="{{aluminium.id}}">{{aluminium.name}} / $ {{aluminium.price}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="TipoVidrio" class="form-label">Tipo del Vidrio</label>
+      <select class="form-select" aria-label="Default select example" id="TipoVidrio">
+        <option value="0" selected>- seleccione -</option>
+        {% for type in glass_type %}
+        <option value="{{type.id}}">{{type.name}} / $ {{type.price}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+      <label class="form-check-label" for="flexCheckDefault">
+        Vidrio Esmerilizado
+      </label>
+    </div>
+    <br
+     />
+    <div class="mb-3 row">
+      <label for="NoUnidades" class="col-sm-3 col-form-label">No unidades</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="NoUnidades">
+      </div>
+    </div>
+    <hr />
+    <div class="mb-3 row">
+      <label for="ResultadoCotizacion" class="col-sm-5 col-form-label"><b>Resultado Cotización</b></label>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" id="ResultadoCotizacion" disabled>
+      </div>
+    </div>
+    <button onclick="getQuoteWindow()" type="submit" class="btn btn-primary">Solicitar</button>
+  </div>
+  <!-- Quote made -->
+  <div class="mt-5 list-items-quote">
+    <h4>Lista de articulos cotizados</h4>
+    <div>
 
-<div class="content-form-price">
-  <div class="dimensions-window">
-    <div class="mb-3 row">
-      <label for="Ancho" class="col-sm-2 col-form-label">Ancho</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="Ancho">
-      </div>
-    </div>
-    <div class="mb-3 row">
-      <label for="Alto" class="col-sm-2 col-form-label">Alto</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="Alto">
-      </div>
     </div>
   </div>
-  <div class="mb-3">
-    <label for="EstiloVentana" class="form-label">Estilo de la ventana</label>
-    <select class="form-select" aria-label="Default select example" id="estiloVentana">
-      <option value="0" selected>- seleccione -</option>
-      {% for style in style_window %}
-      <option value="{{style.name}}">{{style.name}}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="AcabadoAluminio" class="form-label">Acabado del aluminio</label>
-    <select class="form-select" aria-label="Default select example" id="AcabadoAluminio">
-      <option value="0" selected>- seleccione -</option>
-      {% for aluminium in aluminum_finishes %}
-      <option value="{{aluminium.id}}">{{aluminium.name}} / $ {{aluminium.price}}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="TipoVidrio" class="form-label">Tipo del Vidrio</label>
-    <select class="form-select" aria-label="Default select example" id="TipoVidrio">
-      <option value="0" selected>- seleccione -</option>
-      {% for type in glass_type %}
-      <option value="{{type.id}}">{{type.name}} / $ {{type.price}}</option>
-      {% endfor %}
-    </select>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-      Vidrio Esmerilizado
-    </label>
-  </div>
-  <br />
-  <div class="mb-3 row">
-    <label for="NoUnidades" class="col-sm-3 col-form-label">No unidades</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" id="NoUnidades">
-    </div>
-  </div>
-  <hr />
-  <div class="mb-3 row">
-    <label for="ResultadoCotizacion" class="col-sm-5 col-form-label"><b>Resultado Cotización</b></label>
-    <div class="col-sm-7">
-      <input type="text" class="form-control" id="ResultadoCotizacion" disabled>
-    </div>
-  </div>
-  <button onclick="getQuoteWindow()" type="submit" class="btn btn-primary">Solicitar</button>
 </div>
 {% endblock content %}

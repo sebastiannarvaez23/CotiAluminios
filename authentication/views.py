@@ -57,6 +57,7 @@ class UserCreateView(CreateView):
         last_name = self.request.POST.get('lastname')
         email = self.request.POST.get('email')
         password = self.request.POST.get('password')
+        is_staff = self.request.POST.get('isadmin')
         # Pendiente terminar esta validación
         
         user = User(
@@ -66,6 +67,7 @@ class UserCreateView(CreateView):
             email=email,
         )
         user.set_password(password)
+        if is_staff != None: user.is_staff = True
         user.save()
         return HttpResponseRedirect(redirect_to=self.get_success_url())
 

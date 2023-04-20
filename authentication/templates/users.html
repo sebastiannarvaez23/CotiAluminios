@@ -49,7 +49,7 @@
         </tbody>
       </table>
     </div>
-    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Agregar Usuario</button>
+    <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" {% if user.is_staff == False and user.is_superuser == False %}disabled{% endif %}>Agregar Usuario</button>
   </div>
   <div class="btn-add-element-window">
   </div>
@@ -89,6 +89,12 @@
           <div class="form-group">
             <label for="element-price" class="col-form-label">Confirmar Contraseña</label>
             <input name="passwordconfirm" type="password" class="form-control" id="element-price">
+          </div>
+          <div class="form-check mt-3">
+            <input name="isadmin" class="form-check-input" type="checkbox" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Usuario admin
+            </label>
           </div>
         </div>
         <div class="modal-footer">
