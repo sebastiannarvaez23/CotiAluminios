@@ -1,3 +1,15 @@
+.ListQuote {
+    text-align: center !important;
+}
+
+.footer-quote h5 {
+    display: inline-block;
+}
+
+.value-quote {
+    float: right;
+}
+
 .contain-elements-window h1 {
     text-align: center;
     margin-top: 4vh;
