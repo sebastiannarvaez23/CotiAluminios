@@ -1,5 +1,20 @@
 .ListQuote {
     text-align: center !important;
+    overflow: scroll;
+    height: 55vh;
+}
+
+.ListQuote::-webkit-scrollbar {
+    width: 7px;
+}
+
+.ListQuote::-webkit-scrollbar-thumb {
+    background: #11101d;
+    border-radius: 10px;
+}
+
+.footer-quote {
+    padding: 0px 40px;
 }
 
 .footer-quote h5 {
