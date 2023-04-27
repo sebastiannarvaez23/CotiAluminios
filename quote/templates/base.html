@@ -76,10 +76,12 @@
         <a class="nav-link {% if request.path == '/glass/list/' %} active {% endif %}"
           href="{% url 'glasstype' %}">Tipos de vidrio</a>
       </li>
+      {% if user.is_staff %}
       <li class="nav-item">
         <a class="nav-link {% if request.path == '/auth/users/' %} active {% endif %}"
           href="{% url 'users' %}">Usuarios</a>
       </li>
+      {% endif %}
       {% endif %}
       {% if user.is_authenticated == False %}
       <li class="nav-item">
@@ -99,8 +101,8 @@
 
   {% block content %}{% endblock content %}
 
-  <script src="{% static 'js/api-a.js' %}"></script>
-  <script type="text/babel" data-type="module" src="{% static 'js/index-d.jsx' %}"></script>
+  <script src="{% static 'js/api-b.js' %}"></script>
+  <script type="text/babel" data-type="module" src="{% static 'js/index-e.jsx' %}"></script>
 </body>
 
 </html>

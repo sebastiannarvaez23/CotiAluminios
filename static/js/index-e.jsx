@@ -1,4 +1,3 @@
-
 const FormGeneral = () => {
 
   const [windowStyle, setWindowStyle] = React.useState("");
@@ -13,6 +12,28 @@ const FormGeneral = () => {
   const [listWindowStyles, setListWindowStyles] = React.useState([]);
   const [listAluminumFinishes, setListAluminumFinishes] = React.useState([]);
   const [listTypeGlass, setListTypeGlass] = React.useState([]);
+
+  const getResultQuote = async (data) => {
+    
+    const url = "/api/quote/";
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    await fetch(url, options)
+      .then(response => response.json())
+      .then(data => {
+        resultadoCotizacion.value = data.result;
+      })
+      .catch(error => {
+        console.error('Error al hacer la petición:', error);
+      });
+  }
 
   const getQuoteWindow = async () => {
     const data = {
@@ -94,8 +115,8 @@ const FormGeneral = () => {
       </div>
       <div className="col-lg-10 btn-group" role="group" aria-label="Basic example">
         <button type="button" className="btn btn-primary">Limpiar</button>
-        <button onclick="" type="button" className="btn btn-primary">Solicitar</button>
-        <button onclick="" type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
+        <button onClick={getResultQuote} type="button" className="btn btn-primary">Solicitar</button>
+        <button onClick="" type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
       </div>
     </React.Fragment>
   )
