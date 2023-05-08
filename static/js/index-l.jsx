@@ -87,6 +87,16 @@ const FormGeneral = (props) => {
       });
   }
 
+  const clean_form = () => {
+    setWindowWidth("");
+    setWindowHeight("");
+    setWindowStyle("");
+    setAluminumFinishes("");
+    setTypeGlass("");
+    setGlassFrosted(false);
+    setNumWindowQuote("");
+  }
+
   React.useEffect(() => {
     getListWindowStyles();
     getListAluminumFinishes();
@@ -123,8 +133,8 @@ const FormGeneral = (props) => {
       </div>
       <div className="mb-3">
         <label htmlFor="EstiloVentana" className="form-label">Estilo de la ventana</label>
-        <select onChange={(e) => { setWindowStyle(e.target.value) }} className="form-select" aria-label="Default select example" id="estiloVentana">
-          <option value="0">- seleccione -</option>
+        <select value={windowStyle} onChange={(e) => { setWindowStyle(e.target.value) }} className="form-select" aria-label="Default select example" id="estiloVentana">
+          <option value="">- seleccione -</option>
           {listWindowStyles.map((element) => (
             <option key={element.id} value={element.id}>{element.name} / $ {element.price}</option>
           ))}
@@ -132,8 +142,8 @@ const FormGeneral = (props) => {
       </div>
       <div className="mb-3">
         <label htmlFor="AcabadoAluminio" className="form-label">Acabado del aluminio</label>
-        <select onChange={(e) => { setAluminumFinishes(e.target.value) }} className="form-select" aria-label="Default select example" id="AcabadoAluminio">
-          <option value="0">- seleccione -</option>
+        <select value={aluminumFinishes} onChange={(e) => { setAluminumFinishes(e.target.value) }} className="form-select" aria-label="Default select example" id="AcabadoAluminio">
+          <option value="">- seleccione -</option>
           {listAluminumFinishes.map((element) => (
             <option key={element.id} value={element.id}>{element.name} / $ {element.price}</option>
           ))}
@@ -141,15 +151,15 @@ const FormGeneral = (props) => {
       </div>
       <div className="mb-3">
         <label htmlFor="TipoVidrio" className="form-label">Tipo del Vidrio</label>
-        <select onChange={(e) => { setTypeGlass(e.target.value) }} className="form-select" aria-label="Default select example" id="TipoVidrio">
-          <option value="0">- seleccione -</option>
+        <select value={typeGlass} onChange={(e) => { setTypeGlass(e.target.value) }} className="form-select" aria-label="Default select example" id="TipoVidrio">
+          <option value="">- seleccione -</option>
           {listTypeGlass.map((element) => (
             <option key={element.id} value={element.id}>{element.name} / $ {element.price}</option>
           ))}
         </select>
       </div>
       <div className="form-check">
-        <input onChange={(e) => { setGlassFrosted(!glassFrosted) }} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+        <input checked={glassFrosted} onChange={(e) => { setGlassFrosted(!glassFrosted) }} className="form-check-input" type="checkbox" id="flexCheckDefault" />
         <label className="form-check-label" htmlFor="flexCheckDefault">
           Vidrio Esmerilizado
         </label>
@@ -176,7 +186,7 @@ const FormGeneral = (props) => {
         </div>
       </div>
       <div className="col-lg-10 btn-group" role="group" aria-label="Basic example">
-        <button type="button" className="btn btn-primary">Limpiar</button>
+        <button onClick={clean_form} type="button" className="btn btn-primary">Limpiar</button>
         <button onClick={getListWindowStyles} type="button" className="btn btn-primary">Solicitar</button>
         <button type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
       </div>
