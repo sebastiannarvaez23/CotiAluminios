@@ -136,7 +136,7 @@ const FormGeneral = (props) => {
         <select value={windowStyle} onChange={(e) => { setWindowStyle(e.target.value) }} className="form-select" aria-label="Default select example" id="estiloVentana">
           <option value="">- seleccione -</option>
           {listWindowStyles.map((element) => (
-            <option key={element.id} value={element.id}>{element.name} / $ {element.price}</option>
+            <option key={element.id} value={element.id}>{element.name}</option>
           ))}
         </select>
       </div>
@@ -187,7 +187,7 @@ const FormGeneral = (props) => {
       </div>
       <div className="col-lg-10 btn-group" role="group" aria-label="Basic example">
         <button onClick={clean_form} type="button" className="btn btn-primary">Limpiar</button>
-        <button onClick={getListWindowStyles} type="button" className="btn btn-primary">Solicitar</button>
+        <button onClick={getResultQuote} type="button" className="btn btn-primary">Solicitar</button>
         <button type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
       </div>
     </React.Fragment>
@@ -234,6 +234,8 @@ const ListItemQuote = (props) => {
         <div className="footer-quote">
           <h5>Total</h5><h5 className="value-quote">$ {sumPrice}</h5>
         </div>
+
+        <button type="button" class="btn btn-primary">Descargar PDF</button>
       </div>
     </React.Fragment>
   )

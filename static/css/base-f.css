@@ -5,11 +5,14 @@
 }
 
 .list-items-quote {
-    border: rgb(187, 179, 179) 1px solid;
+    border-top: rgb(238, 232, 232) 1px solid;
+    border-left: rgb(238, 232, 232) 1px solid;
+    border-right: rgb(238, 232, 232) 1px solid;
     width: 90%;
-    height: 75vh;
+    height: 70vh;
     padding: 16px;
-    border-radius: 16px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
 }
 
 .list-items-quote h4 {

@@ -46,13 +46,13 @@ def getQuoteWindow(request):
     dicTipoVentana = {'O': 1, 'XO': 2, 'OXO': 3, 'OXXO':4}
 
     data = json.loads(request.body)
-    estilo_ventana = data['estilo_ventana']
-    ancho = int(data['ancho'])
-    alto = int(data['alto'])
-    acabado_aluminio = data['acabado_aluminio']
-    tipo_vidrio = data['tipo_vidrio']
-    vidrio_esmerilado = bool(data['vidrio_esmerilado'])
-    numero_ventanas_cotizar = int(data['numero_ventanas_cotizar'])
+    estilo_ventana = data['window_style']
+    ancho = int(data['window_width'])
+    alto = int(data['window_height'])
+    acabado_aluminio = data['aluminum_finishes']
+    tipo_vidrio = data['type_glass']
+    vidrio_esmerilado = bool(data['glass_frosted'])
+    numero_ventanas_cotizar = int(data['num_window_quote'])
 
     aluminum_finishes =  AluminumFinishes.objects.get(id=acabado_aluminio)
     glass_type =  GlassType.objects.get(id=tipo_vidrio)

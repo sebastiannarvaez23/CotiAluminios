@@ -1,7 +1,7 @@
 .ListQuote {
     text-align: center !important;
     overflow: scroll;
-    height: 55vh;
+    height: 52vh;
 }
 
 .ListQuote::-webkit-scrollbar {
