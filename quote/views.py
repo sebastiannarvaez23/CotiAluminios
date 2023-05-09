@@ -145,6 +145,12 @@ def getQuoteWindow(request):
 
     corners_cost = corner_price * 4 * len(window_style.name)
     total_cost = (float(lock_price) + float(glass_cost) + float(corners_cost) + float(aluminum_cost)) * num_window_quote
-    total_cost = locale.currency(total_cost, grouping=True, symbol=True)
+    total_cost_format = locale.currency(total_cost, grouping=True, symbol=True)
+    data = {
+        'name': window_style.name,
+        'quantity': num_window_quote,
+        'price': total_cost,
+        'result': total_cost_format
+    }
 
-    return JsonResponse({'status_code': 200, 'result': total_cost})
+    return JsonResponse({'status_code': 200, 'data': data})

@@ -8,6 +8,11 @@ const FormGeneral = (props) => {
   const [typeGlass, setTypeGlass] = React.useState("");
   const [glassFrosted, setGlassFrosted] = React.useState(false);
   const [numWindowQuote, setNumWindowQuote] = React.useState("");
+  const [quote, setQuote] = React.useState({
+    name: "",
+    quantity: "",
+    price: ""
+  });
 
   const [listWindowStyles, setListWindowStyles] = React.useState([]);
   const [listAluminumFinishes, setListAluminumFinishes] = React.useState([]);
@@ -81,7 +86,8 @@ const FormGeneral = (props) => {
       .then(response => response.json())
       .then(data => {
         if (data.status_code == 200) {
-          props.setResultQuote(data.result);
+          props.setResultQuote(data.data.result);
+          setQuote(data.data)
         } else if (data.status_code == 400) {
 
           const Toast = Swal.mixin({
@@ -105,6 +111,15 @@ const FormGeneral = (props) => {
       .catch(error => {
         console.error('Error al hacer la petición:', error);
       });
+  }
+
+  const addItemQuote = (data) => {
+    if (data.name === "" || data.name === null || data.name === undefined) { return };
+    const arr = props.listItemQuote;
+    arr.push(data)
+    props.setListItemQuote(arr)
+    props.setNumRowsItemQuote(props.numRowsItemQuote+1)
+    console.log(props.listItemQuote)
   }
 
   const clean_form = () => {
@@ -210,22 +225,30 @@ const FormGeneral = (props) => {
       <div className="col-lg-10 btn-group" role="group" aria-label="Basic example">
         <button onClick={clean_form} type="button" className="btn btn-primary">Limpiar</button>
         <button onClick={getResultQuote} type="button" className="btn btn-primary">Solicitar</button>
-        <button type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
+        <button onClick={() => { 
+          addItemQuote({
+            id: props.numRowsItemQuote,
+            name: quote.name,
+            quantity: quote.quantity,
+            price: quote.price
+          })}} type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
       </div>
     </React.Fragment>
   )
 }
 
-const ListItemQuote = (props) => {
+const ListItemQuote = ({ listItemQuote, numRowsItemQuote }) => {
 
   const [sumPrice, setSumPrice] = React.useState(0);
 
   React.useEffect(() => {
-    const prices = props.listItemCuote.map(obj => obj.price);
+
+    const prices = listItemQuote.map(obj => obj.price);
     const totalPrice = prices.reduce((sum, price) => sum + price, 0);
     const formattedPrice = totalPrice.toLocaleString("es-AR");
     setSumPrice(formattedPrice);
-  }, [props.listItemCuote])
+
+  }, [ numRowsItemQuote ])
 
   return (
     <React.Fragment>
@@ -240,12 +263,12 @@ const ListItemQuote = (props) => {
             </tr>
           </thead>
           <tbody id="RowsQuote">
-            {props.listItemCuote.map(item =>
+            {listItemQuote.map(item =>
             (<tr key={item.id}>
               <th scope="row">{item.id}</th>
               <td>{item.name}</td>
               <td>{item.quantity}</td>
-              <td>{item.price}</td>
+              <td>{item.price.toLocaleString('es-CO', {style: 'currency', currency: 'COP'})}</td>
             </tr>)
             )}
           </tbody>
@@ -266,7 +289,8 @@ const ListItemQuote = (props) => {
 const App = () => {
 
   const [resultQuote, setResultQuote] = React.useState("");
-  const [listItemCuote, setListItemCuote] = React.useState([]);
+  const [listItemQuote, setListItemQuote] = React.useState([]);
+  const [numRowsItemQuote, setNumRowsItemQuote] = React.useState(1);
 
   return (
     <React.Fragment>
@@ -274,13 +298,18 @@ const App = () => {
         <FormGeneral
           resultQuote={resultQuote}
           setResultQuote={setResultQuote}
+          listItemQuote={listItemQuote}
+          setListItemQuote={setListItemQuote}
+          numRowsItemQuote={numRowsItemQuote}
+          setNumRowsItemQuote={setNumRowsItemQuote}
         />
       </div>
       <div className="mt-5 list-items-quote">
         <h4>Lista de articulos cotizados</h4>
         <div id="ListItemQuote">
           <ListItemQuote
-            listItemCuote={listItemCuote}
+            listItemQuote={listItemQuote}
+            numRowsItemQuote={numRowsItemQuote}
           />
         </div>
       </div>
