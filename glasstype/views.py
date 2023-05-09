@@ -9,7 +9,7 @@ from glasstype.models import GlassType
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
 class GlassTypeTemplateView(TemplateView):
-    template_name = "glass_type.html"
+    template_name = "glass-type.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +19,7 @@ class GlassTypeTemplateView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class GlassTypeCreateView(CreateView):
     model = GlassType
-    template_name = "window_styles.html"
+    template_name = "glass-type.html"
     fields = ['name', 'price']
     
     def get_success_url(self):
@@ -30,13 +30,13 @@ class GlassTypeCreateView(CreateView):
         price = self.request.POST.get('price')
         # Pendiente terminar esta validación
         if name == None or price == None: return HttpResponse(status=400)
-        style_window = GlassType(name=name, price=price)
-        style_window.save()
+        glass_type = GlassType(name=name, price=price)
+        glass_type.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
 
 @method_decorator(login_required, name='dispatch')
 class GlassTypeDeleteView(DeleteView):
     model = GlassType
-    template_name = 'glass_type_conf_delete.html'
+    template_name = 'glass-type-conf-delete.html'
     success_url = reverse_lazy('glasstype')

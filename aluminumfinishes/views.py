@@ -9,7 +9,7 @@ from aluminumfinishes.models import AluminumFinishes
 # Create your views here.
 @method_decorator(login_required, name='dispatch') 
 class AluminumFinishesTemplateView(TemplateView):
-    template_name = "aluminum_finishes.html"
+    template_name = "aluminum-finishes.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +19,7 @@ class AluminumFinishesTemplateView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class AluminumFinishesCreateView(CreateView):
     model = AluminumFinishes
-    template_name = "aluminum_finishes.html"
+    template_name = "aluminum-finishes.html"
     fields = ['name', 'price']
     
     def get_success_url(self):
@@ -38,5 +38,5 @@ class AluminumFinishesCreateView(CreateView):
 @method_decorator(login_required, name='dispatch')
 class AluminumFinishesDeleteView(DeleteView):
     model = AluminumFinishes
-    template_name = 'aluminum_finishes_conf_delete.html'
+    template_name = 'aluminum-finishes-conf-delete.html'
     success_url = reverse_lazy('aluminumfinishes')

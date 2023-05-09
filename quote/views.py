@@ -1,17 +1,21 @@
 import json, locale
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect, HttpResponse
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from glasstype.models import GlassType
 from aluminumfinishes.models import AluminumFinishes
 from stylewindow.models import StyleWindow
 from quote.models import MasterArticlesAndServices
+from django.urls import reverse_lazy
 
 # Create your views here.
 class QuoteWindowTemplateView(TemplateView):
-    """Class QuoteWindow"""
-    template_name = "window_quote.html"
+    template_name = "window-quote.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,6 +23,39 @@ class QuoteWindowTemplateView(TemplateView):
         context['aluminum_finishes'] = AluminumFinishes.objects.all()
         context['glass_type'] = GlassType.objects.all()
         return context
+
+@method_decorator(login_required, name='dispatch')
+class ArticlesAndServicesTemplateView(TemplateView):
+    template_name = "articles-and-services.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articles_and_services'] = MasterArticlesAndServices.objects.all()
+        return context
+
+@method_decorator(login_required, name='dispatch')
+class ArticlesAndServicesCreateView(CreateView):
+    model = MasterArticlesAndServices
+    template_name = "articles-and-services.html"
+    fields = ['name', 'price']
+    
+    def get_success_url(self):
+        return reverse_lazy('articlesandservices')
+    
+    def form_valid(self, form):
+        name = self.request.POST.get('name')
+        price = self.request.POST.get('price')
+        # Pendiente terminar esta validación
+        if name == None or price == None: return HttpResponse(status=400)
+        article_or_service = MasterArticlesAndServices(name=name, price=price)
+        article_or_service.save()
+        return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class ArticlesAndServicesDeleteView(DeleteView):
+    model = GlassType
+    template_name = 'articles-and-services-delete.html'
+    success_url = reverse_lazy('articlesandservices')
 
 @csrf_exempt
 def getWindowStyles(request):

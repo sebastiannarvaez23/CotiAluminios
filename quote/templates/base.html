@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="{% static 'img/ventana.ico' %}">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'css/base-f.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-g.css' %}">
   <link rel="stylesheet" href="{% static 'css/login-b.css' %}">
   <link rel="stylesheet" href="{% static 'css/window-styles-f.css' %}">
 
@@ -78,6 +78,10 @@
       <li class="nav-item">
         <a class="nav-link {% if request.path == '/glass/list/' %} active {% endif %}"
           href="{% url 'glasstype' %}">Tipos de vidrio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/quote/articles-and-services/' %} active {% endif %}"
+          href="{% url 'articlesandservices' %}">Articulos y Servicios</a>
       </li>
       {% if user.is_staff %}
       <li class="nav-item">

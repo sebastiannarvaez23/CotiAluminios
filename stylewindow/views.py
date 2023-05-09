@@ -9,7 +9,7 @@ from .models import StyleWindow
 # Create your views here.
 @method_decorator(login_required, name='dispatch')
 class StylesWindowTemplateView(TemplateView):
-    template_name = "window_styles.html"
+    template_name = "window-styles.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -19,7 +19,7 @@ class StylesWindowTemplateView(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class StylesWindowCreateView(CreateView):
     model = StyleWindow
-    template_name = "window_styles.html"
+    template_name = "window-styles.html"
     fields = ['name', 'price']
     
     def get_success_url(self):
@@ -38,5 +38,5 @@ class StylesWindowCreateView(CreateView):
 @method_decorator(login_required, name='dispatch')
 class StylesWindowDeleteView(DeleteView):
     model = StyleWindow
-    template_name = 'window_style_conf_delete.html'
+    template_name = 'window-style-conf-delete.html'
     success_url = reverse_lazy('windowstyles')
