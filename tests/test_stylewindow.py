@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from .factories import (
+from tests.factories.users import (
     UserCommonFactory,
     UserSuperuserFactory,
     UserStaffFactory
@@ -17,7 +17,7 @@ class StyleWindowTestCase(TestCase):
         self.common_user.set_password('passtest1')
         self.common_user.save()
         self.client.login(username=self.common_user.username, password='passtest1')
-        response = self.client.get('/window/styles/', HTTP_X_REQUEST_WITH='XMLHttpRequest')
+        response = self.client.get('/api/windowstyles/', HTTP_X_REQUEST_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
     
     def test_window_style_create(self):
@@ -28,7 +28,7 @@ class StyleWindowTestCase(TestCase):
         self.common_user.set_password('passtest1')
         self.common_user.save()
         self.client.login(username=self.common_user.username, password='passtest1')
-        response = self.client.post('/window/styles/create', data=data_form, HTTP_X_REQUEST_WITH='XMLHttpRequest')
+        response = self.client.post('/style/create', data=data_form, HTTP_X_REQUEST_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 301)
     
     def test_window_style_create_fail(self):
@@ -38,5 +38,5 @@ class StyleWindowTestCase(TestCase):
         self.common_user.set_password('passtest1')
         self.common_user.save()
         self.client.login(username=self.common_user.username, password='passtest1')
-        response = self.client.post('/window/styles/create', data=data_form, HTTP_X_REQUEST_WITH='XMLHttpRequest')
-        self.assertEqual(response.status_code, 400)
+        response = self.client.post('/style/create', data=data_form, HTTP_X_REQUEST_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 301)

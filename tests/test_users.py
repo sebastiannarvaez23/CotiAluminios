@@ -1,5 +1,5 @@
 from django.test import TestCase, Client
-from .factories import (
+from tests.factories.users import (
     UserCommonFactory,
     UserSuperuserFactory,
     UserStaffFactory

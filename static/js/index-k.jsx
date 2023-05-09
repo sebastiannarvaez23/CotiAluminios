@@ -80,7 +80,27 @@ const FormGeneral = (props) => {
     await fetch(url, conf)
       .then(response => response.json())
       .then(data => {
-        console.log(data.result);
+        if (data.status_code == 200) {
+          props.setResultQuote(data.result);
+        } else if (data.status_code == 400) {
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'error',
+            title: data.message
+          })
+        }
       })
       .catch(error => {
         console.error('Error al hacer la petición:', error);
@@ -95,6 +115,7 @@ const FormGeneral = (props) => {
     setTypeGlass("");
     setGlassFrosted(false);
     setNumWindowQuote("");
+    props.setResultQuote("");
   }
 
   React.useEffect(() => {
@@ -106,6 +127,7 @@ const FormGeneral = (props) => {
   return (
     <React.Fragment>
       <div className="dimensions-window">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{% csrf_token %}" />
         <div className="mb-3 row">
           <label htmlFor="Ancho" className="col-sm-2 col-form-label">Ancho</label>
           <div className="col-sm-9">
@@ -171,7 +193,7 @@ const FormGeneral = (props) => {
         <div className="col-sm-9">
           <input onChange={(e) => {
             const newValue = e.target.value;
-            const regex = /^[^\d]*(\d{0,3})[^\d]*$/;
+            const regex = /^\d{0,3}?$/;
             if (regex.test(newValue)) {
               setNumWindowQuote(newValue);
             }
@@ -235,7 +257,7 @@ const ListItemQuote = (props) => {
           <h5>Total</h5><h5 className="value-quote">$ {sumPrice}</h5>
         </div>
 
-        <button type="button" class="btn btn-primary">Descargar PDF</button>
+        <button type="button" className="btn btn-primary">Descargar PDF</button>
       </div>
     </React.Fragment>
   )

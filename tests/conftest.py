@@ -1,6 +1,6 @@
 import pytest
 
-from tests.factories import UserFactory
+from tests.fatories.users import UserFactory
 from django.contrib.auth.models import User
 
 @pytest.fixture
