@@ -281,7 +281,10 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) =>
           <h5>Total</h5><h5 className="value-quote">$ {sumPrice}</h5>
         </div>
 
-        <button onClick={() => { setListItemQuote([]) }} type="button" className="btn btn-primary">Limpiar</button>
+        <button onClick={() => {
+          setListItemQuote([]);
+          setSumPrice(0)
+        }} type="button" className="btn btn-primary">Limpiar</button>
         <button type="button" className="btn btn-primary mt-2">Descargar PDF</button>
       </div>
     </React.Fragment>
