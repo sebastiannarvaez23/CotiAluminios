@@ -118,7 +118,7 @@ const FormGeneral = (props) => {
     const arr = props.listItemQuote;
     arr.push(data)
     props.setListItemQuote(arr)
-    props.setNumRowsItemQuote(props.numRowsItemQuote+1)
+    props.setNumRowsItemQuote(props.numRowsItemQuote + 1)
     console.log(props.listItemQuote)
   }
 
@@ -225,19 +225,20 @@ const FormGeneral = (props) => {
       <div className="col-lg-10 btn-group" role="group" aria-label="Basic example">
         <button onClick={clean_form} type="button" className="btn btn-primary">Limpiar</button>
         <button onClick={getResultQuote} type="button" className="btn btn-primary">Solicitar</button>
-        <button onClick={() => { 
+        <button onClick={() => {
           addItemQuote({
             id: props.numRowsItemQuote,
             name: quote.name,
             quantity: quote.quantity,
             price: quote.price
-          })}} type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
+          })
+        }} type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
       </div>
     </React.Fragment>
   )
 }
 
-const ListItemQuote = ({ listItemQuote, numRowsItemQuote }) => {
+const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) => {
 
   const [sumPrice, setSumPrice] = React.useState(0);
 
@@ -248,7 +249,7 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote }) => {
     const formattedPrice = totalPrice.toLocaleString("es-AR");
     setSumPrice(formattedPrice);
 
-  }, [ numRowsItemQuote ])
+  }, [numRowsItemQuote])
 
   return (
     <React.Fragment>
@@ -268,7 +269,7 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote }) => {
               <th scope="row">{item.id}</th>
               <td>{item.name}</td>
               <td>{item.quantity}</td>
-              <td>{item.price.toLocaleString('es-CO', {style: 'currency', currency: 'COP'})}</td>
+              <td>{item.price.toLocaleString('es-CO', { style: 'currency', currency: 'COP' })}</td>
             </tr>)
             )}
           </tbody>
@@ -280,7 +281,8 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote }) => {
           <h5>Total</h5><h5 className="value-quote">$ {sumPrice}</h5>
         </div>
 
-        <button type="button" className="btn btn-primary">Descargar PDF</button>
+        <button onClick={() => { setListItemQuote([]) }} type="button" className="btn btn-primary">Limpiar</button>
+        <button type="button" className="btn btn-primary mt-2">Descargar PDF</button>
       </div>
     </React.Fragment>
   )
@@ -309,6 +311,7 @@ const App = () => {
         <div id="ListItemQuote">
           <ListItemQuote
             listItemQuote={listItemQuote}
+            setListItemQuote={setListItemQuote}
             numRowsItemQuote={numRowsItemQuote}
           />
         </div>
