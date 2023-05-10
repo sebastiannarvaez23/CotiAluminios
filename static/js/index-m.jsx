@@ -1,3 +1,6 @@
+// COMPONENTS -----------------------------------
+
+// Form general ----
 
 const FormGeneral = (props) => {
 
@@ -119,7 +122,6 @@ const FormGeneral = (props) => {
     arr.push(data)
     props.setListItemQuote(arr)
     props.setNumRowsItemQuote(props.numRowsItemQuote + 1)
-    console.log(props.listItemQuote)
   }
 
   const clean_form = () => {
@@ -238,9 +240,55 @@ const FormGeneral = (props) => {
   )
 }
 
+// Document Quote ----
+
 const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) => {
 
   const [sumPrice, setSumPrice] = React.useState(0);
+
+  const downloadQuote = async (data) => {
+
+    const getCookie = (name) => {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+          }
+        }
+      }
+      return cookieValue;
+    }
+
+    const getConfAPI = (data) => {
+      return {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': getCookie('csrftoken'),
+        },
+        body: JSON.stringify(data)
+      };
+    }
+
+    const confAPI = getConfAPI(data)
+
+    await fetch('/download-quote/', confAPI)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = window.URL.createObjectURL(new Blob([blob]));
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'archivo.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+  };
 
   React.useEffect(() => {
 
@@ -285,11 +333,22 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) =>
           setListItemQuote([]);
           setSumPrice(0)
         }} type="button" className="btn btn-primary">Limpiar</button>
-        <button type="button" className="btn btn-primary mt-2">Descargar PDF</button>
+        <button onClick={() => {
+          downloadQuote({
+            "documentHeader": {
+              "customer_name": "test",
+              "customer_address": "test",
+              "customer_telephone": "test"
+            },
+            "documentLine": listItemQuote
+          })
+        }} type="button" className="btn btn-primary mt-2">Descargar PDF</button>
       </div>
     </React.Fragment>
   )
 }
+
+// APP MAIN -----------------------------------
 
 const App = () => {
 

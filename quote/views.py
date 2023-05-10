@@ -3,7 +3,7 @@ import json, locale
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, FileResponse
 from django.views.generic.edit import CreateView, DeleteView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -11,7 +11,9 @@ from glasstype.models import GlassType
 from aluminumfinishes.models import AluminumFinishes
 from stylewindow.models import StyleWindow
 from quote.models import MasterArticlesAndServices
+from django.views.generic import View
 from django.urls import reverse_lazy
+from quote.reports.documentquote import export_quote_pdf
 
 # Create your views here.
 class QuoteWindowTemplateView(TemplateView):
@@ -56,6 +58,17 @@ class ArticlesAndServicesDeleteView(DeleteView):
     model = GlassType
     template_name = 'articles-and-services-delete.html'
     success_url = reverse_lazy('articlesandservices')
+
+def download_quote(request):
+    data = json.loads(request.body)
+    document_header = data['documentHeader']
+    document_line = data['documentLine']
+    document = export_quote_pdf(document_header, document_line)
+
+    filename = "Cotización.pdf"
+    response = HttpResponse(document, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+    return response
 
 @csrf_exempt
 def getWindowStyles(request):
@@ -154,3 +167,6 @@ def getQuoteWindow(request):
     }
 
     return JsonResponse({'status_code': 200, 'data': data})
+
+
+
