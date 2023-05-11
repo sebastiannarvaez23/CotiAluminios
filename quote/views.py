@@ -157,11 +157,13 @@ def getQuoteWindow(request):
     # Esquinas
 
     corners_cost = corner_price * 4 * len(window_style.name)
+    unit_cost = (float(lock_price) + float(glass_cost) + float(corners_cost) + float(aluminum_cost))
     total_cost = (float(lock_price) + float(glass_cost) + float(corners_cost) + float(aluminum_cost)) * num_window_quote
     total_cost_format = locale.currency(total_cost, grouping=True, symbol=True)
     data = {
         'name': window_style.name,
         'quantity': num_window_quote,
+        'price_unit': unit_cost,
         'price': total_cost,
         'result': total_cost_format
     }

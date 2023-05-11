@@ -232,6 +232,7 @@ const FormGeneral = (props) => {
             id: props.numRowsItemQuote,
             name: quote.name,
             quantity: quote.quantity,
+            priceUnit: quote.price_unit,
             price: quote.price
           })
         }} type="button" className="btn btn-primary ml-auto"><i className='bx bx-right-arrow-alt'></i></button>
@@ -242,7 +243,7 @@ const FormGeneral = (props) => {
 
 // Document Quote ----
 
-const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) => {
+const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote, resultQuote }) => {
 
   const [sumPrice, setSumPrice] = React.useState(0);
 
@@ -276,7 +277,6 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) =>
     }
 
     const confAPI = getConfAPI(data)
-
     await fetch('/download-quote/', confAPI)
       .then(response => response.blob())
       .then(blob => {
@@ -333,15 +333,56 @@ const ListItemQuote = ({ listItemQuote, numRowsItemQuote, setListItemQuote }) =>
           setListItemQuote([]);
           setSumPrice(0)
         }} type="button" className="btn btn-primary">Limpiar</button>
-        <button onClick={() => {
-          downloadQuote({
-            "documentHeader": {
-              "customer_name": "test",
-              "customer_address": "test",
-              "customer_telephone": "test"
-            },
-            "documentLine": listItemQuote
+        <button onClick={async () => {
+          if (listItemQuote.length === 0) {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+  
+            Toast.fire({
+              icon: 'error',
+              title: "Primero ingrese elementos a la cotización"
+            })
+
+            return;
+          }
+          const { value: formValues } = await Swal.fire({
+            title: 'Ingrese la siguiente información por favor',
+            html:
+              '<input placeholder="Nombre de la empresa" id="swal-input1" class="swal2-input">' +
+              '<input placeholder="Direccion de la empresa" id="swal-input2" class="swal2-input">' +
+              '<input placeholder="Teléfono de contacto" id="swal-input3" class="swal2-input">',
+            focusConfirm: false,
+            preConfirm: () => {
+              return [
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value,
+                document.getElementById('swal-input3').value
+              ]
+            }
           })
+
+          if (formValues) {
+            downloadQuote({
+              "documentHeader": {
+                "customer_name": formValues[0],
+                "customer_address": formValues[1],
+                "customer_telephone": formValues[2],
+                "total_quote": resultQuote,
+              },
+              "documentLine": listItemQuote
+            })
+          }
+
+          
         }} type="button" className="btn btn-primary mt-2">Descargar PDF</button>
       </div>
     </React.Fragment>
@@ -375,6 +416,7 @@ const App = () => {
             listItemQuote={listItemQuote}
             setListItemQuote={setListItemQuote}
             numRowsItemQuote={numRowsItemQuote}
+            resultQuote={resultQuote}
           />
         </div>
       </div>
