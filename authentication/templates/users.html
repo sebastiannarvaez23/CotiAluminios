@@ -16,7 +16,7 @@
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
             <th scope="col">E-mail</th>
-            <th scope="col"></th>
+            <!-- <th scope="col"></th> -->
             <th scope="col"></th>
           </tr>
         </thead>
@@ -29,11 +29,11 @@
             <td colspan="1">{{userm.first_name}}</td>
             <td colspan="1">{{userm.last_name}}</td>
             <td colspan="1">{{userm.email}}</td>
-            <td colspan="1">
+            <!-- <td colspan="1">
               {% if user.is_staff or user.username == userm.username %}
               <i class='bx bx-pencil'></i>
               {% endif %}
-            </td>
+            </td> -->
             <td colspan="1">
               {% if user.username != userm.username %}
               <a href="{% url 'userdelete' userm.pk %}">

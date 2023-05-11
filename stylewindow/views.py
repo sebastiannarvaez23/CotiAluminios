@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from .models import StyleWindow
 
@@ -32,6 +32,19 @@ class StylesWindowCreateView(CreateView):
         style_window.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class StylesWindowUpdateView(UpdateView):
+    model = StyleWindow
+    template_name = "window-style-conf-update.html"
+    fields = ['name']
+    
+    def get_success_url(self):
+        return reverse_lazy('windowstyles')
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 @method_decorator(login_required, name='dispatch')
 class StylesWindowDeleteView(DeleteView):

@@ -28,10 +28,9 @@
             <td colspan="1">{{aluminum.name}}</td>
             <td colspan="1">$ {{aluminum.price}}</td>
             {% if user.is_staff %}
-            <td colspan="1"><i class='bx bx-pencil'></i></td>
-            <td colspan="1"><a href="{% url 'aluminumfinishesdelete' aluminum.pk %}"><i class='bx bx-trash'></i></a>
+            <td colspan="1"><a href="{% url 'aluminumfinishesupdate' aluminum.pk %}"><i class='bx bx-pencil'></i></a></td>
+            <td colspan="1"><a href="{% url 'aluminumfinishesdelete' aluminum.pk %}"><i class='bx bx-trash'></i></a></td>
             {% endif %}
-            </td>
           </tr>
           {% endfor %}
           {% else %}

@@ -13,7 +13,6 @@
           <tr>
             <th scope="col">id</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Precio</th>
             {% if user.is_staff %}
             <th scope="col"></th>
             <th scope="col"></th>
@@ -26,9 +25,8 @@
           <tr>
             <td colspan="1">{{style.id}}</td>
             <td colspan="1">{{style.name}}</td>
-            <td colspan="1">$ {{style.price}}</td>
             {% if user.is_staff %}
-            <td colspan="1"><a href="{% url 'windowstylesdelete' style.pk %}"><i class='bx bx-pencil'></i></a></td>
+            <td colspan="1"><a href="{% url 'windowstylesupdate' style.pk %}"><i class='bx bx-pencil'></i></a></td>
             <td colspan="1"><a href="{% url 'windowstylesdelete' style.pk %}"><i class='bx bx-trash'></i></a></td>
             {% endif %}
           </tr>

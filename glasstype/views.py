@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
@@ -34,6 +34,19 @@ class GlassTypeCreateView(CreateView):
         glass_type.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class GlassTypeUpdateView(UpdateView):
+    model = GlassType
+    template_name = "glass-type-conf-update.html"
+    fields = ['name', 'price']
+    
+    def get_success_url(self):
+        return reverse_lazy('glasstype')
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 @method_decorator(login_required, name='dispatch')
 class GlassTypeDeleteView(DeleteView):

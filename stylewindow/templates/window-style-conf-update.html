@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="contain-elements-confirm">
+    <h2 class="mb-4" >Actualizar Estilo Ventana</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label for="name" class="col-form-label">Nombre del estilo</label>
+      <div class="">
+        <input name="name" value="" type="text" class="form-control" id="name" />
+      </div>
+      <button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Si, Actualizar</button>
+    </form>
+    <a href="{% url 'windowstyles' %}"><button class="btn btn-outline-danger" data-toggle="modal"
+            data-target="#exampleModal" data-whatever="@getbootstrap">No, cancelar</button></a>
+</div>
+
+{% endblock content %}

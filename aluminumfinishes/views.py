@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from aluminumfinishes.models import AluminumFinishes
 
 # Create your views here.
@@ -34,6 +34,19 @@ class AluminumFinishesCreateView(CreateView):
         aluminum_finishes.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class AluminumFinishesUpdateView(UpdateView):
+    model = AluminumFinishes
+    template_name = "aluminum-finishes-update.html"
+    fields = ['name', 'price']
+    
+    def get_success_url(self):
+        return reverse_lazy('aluminumfinishes')
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 @method_decorator(login_required, name='dispatch')
 class AluminumFinishesDeleteView(DeleteView):

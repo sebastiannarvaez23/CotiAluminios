@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect, HttpResponse, FileResponse
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from glasstype.models import GlassType
@@ -52,6 +52,19 @@ class ArticlesAndServicesCreateView(CreateView):
         article_or_service = MasterArticlesAndServices(name=name, price=price)
         article_or_service.save()
         return HttpResponseRedirect(redirect_to=self.get_success_url())
+
+@method_decorator(login_required, name='dispatch')
+class ArticlesAndServicesUpdateView(UpdateView):
+    model = MasterArticlesAndServices
+    template_name = "articles-and-services-update.html"
+    fields = ['name', 'price']
+    
+    def get_success_url(self):
+        return reverse_lazy('articlesandservices')
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        return response
 
 @method_decorator(login_required, name='dispatch')
 class ArticlesAndServicesDeleteView(DeleteView):

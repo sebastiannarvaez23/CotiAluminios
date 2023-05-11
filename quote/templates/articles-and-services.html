@@ -28,7 +28,7 @@
             <td colspan="1">{{article_or_service.name}}</td>
             <td colspan="1">$ {{article_or_service.price}}</td>
             {% if user.is_staff %}
-            <td colspan="1"><i class='bx bx-pencil'></i></td>
+            <td colspan="1"><a href="{% url 'articlesandservicesupdate' article_or_service.pk %}"><i class='bx bx-pencil'></i></a></td>
             <td colspan="1"><a href="{% url 'articlesandservicesdelete' article_or_service.pk %}"><i class='bx bx-trash'></i></a></td>
             {% endif %}
           </tr>

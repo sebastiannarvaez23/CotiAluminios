@@ -28,7 +28,7 @@
             <td colspan="1">{{glass_type.name}}</td>
             <td colspan="1">$ {{glass_type.price}}</td>
             {% if user.is_staff %}
-            <td colspan="1"><i class='bx bx-pencil'></i></td>
+            <td colspan="1"><a href="{% url 'glasstypeupdate' glass_type.pk %}"><i class='bx bx-pencil'></i></a></td>
             <td colspan="1"><a href="{% url 'glasstypedelete' glass_type.pk %}"><i class='bx bx-trash'></i></a></td>
             {% endif %}
           </tr>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="contain-elements-confirm">
+    <h2 class="mb-4" >Actualizar Tipo de Vidrio</h2>
+    <form method="post">
+      {% csrf_token %}
+      <label for="name" class="col-form-label">Nombre del vidrio</label>
+      <div class="">
+        <input name="name" value="" type="text" class="form-control" id="name" />
+      </div>
+      <label for="price" class="col-form-label">Precio del vidrio</label>
+      <div class="">
+        <input name="price" value="" type="text" class="form-control" id="price" />
+      </div>
+      <button type="submit" class="btn btn-outline-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Si, Actualizar</button>
+    </form>
+    <a href="{% url 'glasstype' %}"><button class="btn btn-outline-danger" data-toggle="modal"
+            data-target="#exampleModal" data-whatever="@getbootstrap">No, cancelar</button></a>
+</div>
+
+{% endblock content %}
