@@ -23,7 +23,7 @@ class QuoteTestCase(TestCase):
 
     def test_get_quote_window(self):
         data = {
-            "window_width": 9,
+            "window_width": 12,
             "window_height": 15,
             "window_style": 1,
             "aluminum_finishes": 1,
@@ -34,7 +34,7 @@ class QuoteTestCase(TestCase):
         response = self.client.post('/api/quote/', json.dumps(data), content_type='application/json', HTTP_X_REQUEST_WITH='XMLHttpRequest')
         response = response.json()
         self.assertEqual(response['status_code'], 200)
-        self.assertEqual(response['result'], '$30,002.00')
+        self.assertEqual(response['data']['result'], '$33,341.00')
 
         
         

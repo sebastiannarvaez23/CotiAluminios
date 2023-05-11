@@ -20,17 +20,15 @@ class StylesWindowTemplateView(TemplateView):
 class StylesWindowCreateView(CreateView):
     model = StyleWindow
     template_name = "window-styles.html"
-    fields = ['name', 'price']
+    fields = ['name']
     
     def get_success_url(self):
         return reverse_lazy('windowstyles')
     
     def form_valid(self, form):
         name = self.request.POST.get('name')
-        price = self.request.POST.get('price')
-        # Pendiente terminar esta validación
-        if name == None or price == None: return HttpResponse(status=400)
-        style_window = StyleWindow(name=name, price=price)
+        if name == None: return HttpResponse(status=400)
+        style_window = StyleWindow(name=name)
         style_window.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
