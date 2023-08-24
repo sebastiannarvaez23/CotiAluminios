@@ -2,16 +2,22 @@
 ## ¿De qué se trata este aplicativo?
 Esta aplicación permite a los usuario con o sin registro realizar las cotizaciones de las ventanas que cada uno de ellos requiere, cumpliendo a detalle con cada uno de los pequeños cambios que generan novedades en el costo, haciendo eficiente para el area comercial la construccion de cotizaciones donde se ven involucradas ventanas muy personalizadas.
 
-## ¿Como hago funcionar el aplicativo?
-Instale el entorno virtual de python 3 con `$ python3 -m venv venv`
-Active el entorno con el siguiente comando:
-Linux: `$ source venv/bin/activate`
-windows: `$ venv/Scripts/activate`
-Instale las dependencias parandose en la ruta raiz del proyecto WMSServices/ y ejecutando el comando `$ pip install -r requiriments.txt`.
+## Instalación
+#### Entorno virtual y dependencias
+1. Lo primero que deberás hacer es crear un entorno virtual de python que te encapsule las dependencias del proyecto, ejecuta `$ python -m venv venv`, hay otras personas utilizan `$ python3 -m venv venv`, revisa cual te funciona a ti.
+2. Activa el entorno virtual con el comando:
+  Linux o mac: `$ source venv/bin/activate`
+  Windows: `$ venv/Scripts/activate`
+3. Instala las dependencias del proyecto las cuales se encuentran el archivo `requiriments.txt`. Ubicate en el proyecto al nivel del archivo mencionado y ejecuta el comando `$ pip install -r requiriments.txt`, cabe aclarar que debes asegurarte de tener el entorno virtual activado, en la mayoria de las terminales va a aparecerte (venv) sobre la linea de comando en la que estés ubicado.
 
-Para nuestro caso y para efectos practicos, dejé en la raiz del proyecto una base de datos SQLite3, la cual está conectada al proyecto como también contiene datos ya creados para lograr hacer ver la aplicación más usable.
+De esta forma tendras las dependencias correctamente instaladas en el entorno que creaste.
 
-Luego de haber realizado los pasos anteriores, debe ejecutar el comando `$ python manage.py runserver`, de este modo se levanta un servidor de desarrollo el cual está configurado para usarse en la ruta: `http://localhost:8000/`
+## Configuración
+1. Inicialmente deberás crear una base de datos denominada `events` en tu servidor de base de datos Postgresql.
+2. Ubica las variables de entorno que te compartí por el correo electronico, esto añade una capa de seguridad a la aplicación. Para ello deberas descargar el archivo `.env` del correo electronico y ubicarlo al nivel de la carpeta settings. Abre el archivo y edita las variables segun las credenciales de acceso, como el dominio/ip y/o puerto al que apunta tu SBD.
+3. En la terminal anterior en la que gestionamos el entorno y las dependencias, dirigite al nivel del archivo `manage.py`.
+4. Luego de tener la base de datos creada, deberás crear y ejecutar las migraciones. Ejecuta el comando `$ python manage.py makemigrations` este comando te creará las migraciones. Posteriormente ejecuta el comando `$ python manage.py migrate` esto hará que los modelos de datos migren a la base que creaste en el punto 1. 
+5. Por ultimo deberas ejecutar el comando `$ python manage.py runserver`.
 
 ## ¿Cómo logro correr los tests?
 En el codigo fuente del aplicativo se construyeron unas pruebas unitarias utilizando el modulo de testing integrado en el framework django. Estas funciones automatizan las pruebas de la creacion de usuarios y la obtención de la cotización. Para correr las pruebas debe detener el servidor (Si realizó los pasos anteriores y aún sigue corriendo) con el comando `cntrl + c`, posteriormente ejecute el comando `$ python manage.py test` y logrará ver todos los tests en ejecución.
