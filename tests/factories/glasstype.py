@@ -1,6 +1,6 @@
 import factory
 
-from glasstype.models import GlassType
+from apps.glasstype.models import GlassType
 
 class GlassTypeFactory(factory.django.DjangoModelFactory):
     

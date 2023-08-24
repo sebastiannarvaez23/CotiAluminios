@@ -1,55 +1,55 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.utils.decorators import method_decorator
-from django.urls import reverse_lazy
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from aluminumfinishes.models import AluminumFinishes
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic.base import TemplateView
+from apps.glasstype.models import GlassType
 
 # Create your views here.
-@method_decorator(login_required, name='dispatch') 
-class AluminumFinishesTemplateView(TemplateView):
-    template_name = "aluminum-finishes.html"
+@method_decorator(login_required, name='dispatch')
+class GlassTypeTemplateView(TemplateView):
+    template_name = "glass-type.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['aluminum_finishes'] = AluminumFinishes.objects.all()
+        context['glasses_types'] = GlassType.objects.all()
         return context
-
+    
 @method_decorator(login_required, name='dispatch')
-class AluminumFinishesCreateView(CreateView):
-    model = AluminumFinishes
-    template_name = "aluminum-finishes.html"
+class GlassTypeCreateView(CreateView):
+    model = GlassType
+    template_name = "glass-type.html"
     fields = ['name', 'price']
     
     def get_success_url(self):
-        return reverse_lazy('aluminumfinishes')
+        return reverse_lazy('glasstype')
     
     def form_valid(self, form):
         name = self.request.POST.get('name')
         price = self.request.POST.get('price')
         # Pendiente terminar esta validación
         if name == None or price == None: return HttpResponse(status=400)
-        aluminum_finishes = AluminumFinishes(name=name, price=price)
-        aluminum_finishes.save()
+        glass_type = GlassType(name=name, price=price)
+        glass_type.save()
 
         return HttpResponseRedirect(redirect_to=self.get_success_url())
 
 @method_decorator(login_required, name='dispatch')
-class AluminumFinishesUpdateView(UpdateView):
-    model = AluminumFinishes
-    template_name = "aluminum-finishes-update.html"
+class GlassTypeUpdateView(UpdateView):
+    model = GlassType
+    template_name = "glass-type-conf-update.html"
     fields = ['name', 'price']
     
     def get_success_url(self):
-        return reverse_lazy('aluminumfinishes')
+        return reverse_lazy('glasstype')
     
     def form_valid(self, form):
         response = super().form_valid(form)
         return response
 
 @method_decorator(login_required, name='dispatch')
-class AluminumFinishesDeleteView(DeleteView):
-    model = AluminumFinishes
-    template_name = 'aluminum-finishes-conf-delete.html'
-    success_url = reverse_lazy('aluminumfinishes')
+class GlassTypeDeleteView(DeleteView):
+    model = GlassType
+    template_name = 'glass-type-conf-delete.html'
+    success_url = reverse_lazy('glasstype')

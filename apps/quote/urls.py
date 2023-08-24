@@ -1,5 +1,5 @@
 from django.urls import path
-from quote import views
+from apps.quote import views
 
 urlpatterns = [
     path('', views.QuoteWindowTemplateView.as_view(), name='quote'),

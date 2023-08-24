@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aluminumfinishes',
-    'authentication',
-    'stylewindow',
-    'glasstype',
-    'quote',
+    'apps.aluminumfinishes',
+    'apps.authentication',
+    'apps.stylewindow',
+    'apps.glasstype',
+    'apps.quote',
 ]
 
 MIDDLEWARE = [

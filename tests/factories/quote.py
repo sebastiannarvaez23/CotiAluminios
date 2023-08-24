@@ -1,6 +1,6 @@
 import factory
 
-from quote.models import MasterArticlesAndServices
+from apps.quote.models import MasterArticlesAndServices
 
 class MasterServiceGlassFrostedFactory(factory.django.DjangoModelFactory):
     

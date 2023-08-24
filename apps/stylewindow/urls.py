@@ -1,5 +1,5 @@
 from django.urls import path
-from stylewindow import views
+from apps.stylewindow import views
 
 urlpatterns = [
     path('list/', views.StylesWindowTemplateView.as_view(), name="windowstyles"),

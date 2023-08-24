@@ -20,12 +20,12 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('quote.urls')),
-    path('style/', include('stylewindow.urls')),
-    path('glass/', include('glasstype.urls')),
-    path('quote/', include('quote.urls')),
-    path('auth/', include('authentication.urls')),
-    path('aluminum/', include('aluminumfinishes.urls')),
+    path('', include('apps.quote.urls')),
+    path('style/', include('apps.stylewindow.urls')),
+    path('glass/', include('apps.glasstype.urls')),
+    path('quote/', include('apps.quote.urls')),
+    path('auth/', include('apps.authentication.urls')),
+    path('aluminum/', include('apps.aluminumfinishes.urls')),
 ]
 
 urlpatterns += [

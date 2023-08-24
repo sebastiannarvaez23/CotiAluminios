@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class StylewindowConfig(AppConfig):
+class AluminumfinishesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'stylewindow'
+    name = 'apps.aluminumfinishes'

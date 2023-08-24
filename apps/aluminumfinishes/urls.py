@@ -1,5 +1,5 @@
 from django.urls import path
-from aluminumfinishes import views
+from apps.aluminumfinishes import views
 
 urlpatterns = [
     path('list/', views.AluminumFinishesTemplateView.as_view(), name="aluminumfinishes"),

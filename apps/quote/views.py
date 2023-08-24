@@ -7,13 +7,13 @@ from django.http import HttpResponseRedirect, HttpResponse, FileResponse
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from glasstype.models import GlassType
-from aluminumfinishes.models import AluminumFinishes
-from stylewindow.models import StyleWindow
-from quote.models import MasterArticlesAndServices
+from apps.glasstype.models import GlassType
+from apps.aluminumfinishes.models import AluminumFinishes
+from apps.stylewindow.models import StyleWindow
+from apps.quote.models import MasterArticlesAndServices
 from django.views.generic import View
 from django.urls import reverse_lazy
-from quote.reports.documentquote import export_quote_pdf
+from apps.quote.reports.documentquote import export_quote_pdf
 
 # Create your views here.
 class QuoteWindowTemplateView(TemplateView):

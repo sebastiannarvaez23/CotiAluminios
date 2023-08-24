@@ -1,6 +1,6 @@
 import factory
 
-from stylewindow.models import StyleWindow
+from apps.stylewindow.models import StyleWindow
 
 class StyleWindowFactory(factory.django.DjangoModelFactory):
     

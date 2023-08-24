@@ -1,5 +1,5 @@
 from django.urls import path
-from glasstype import views
+from apps.glasstype import views
 
 urlpatterns = [
     # Templates
