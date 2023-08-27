@@ -1,13 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect, HttpResponseForbidden
 from django.shortcuts import render, redirect
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.urls import reverse
 from django.views.generic.base import TemplateView, View
-from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic.edit import CreateView, DeleteView
-from django.urls import reverse_lazy
 
 class LoginTemplateView(TemplateView):
     template_name = 'login.html'
@@ -31,6 +30,12 @@ class LogoutView(View):
 @method_decorator(login_required, name='dispatch')
 class UsersTemplateView(TemplateView):
     template_name = "users.html"
+    require_staff = True
+    
+    def dispatch(self, request, *args, **kwargs):
+        if self.require_staff and not request.user.is_staff:
+            return HttpResponseForbidden("Acceso denegado. No eres miembro del staff.")
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
