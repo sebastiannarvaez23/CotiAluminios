@@ -13,11 +13,9 @@ Esta aplicación permite a los usuario con o sin registro realizar las cotizacio
 De esta forma tendras las dependencias correctamente instaladas en el entorno que creaste.
 
 ## Configuración
-1. Inicialmente deberás crear una base de datos denominada `events` en tu servidor de base de datos Postgresql.
-2. Ubica las variables de entorno que te compartí por el correo electronico, esto añade una capa de seguridad a la aplicación. Para ello deberas descargar el archivo `.env` del correo electronico y ubicarlo al nivel de la carpeta settings. Abre el archivo y edita las variables segun las credenciales de acceso, como el dominio/ip y/o puerto al que apunta tu SBD.
-3. En la terminal anterior en la que gestionamos el entorno y las dependencias, dirigite al nivel del archivo `manage.py`.
-4. Luego de tener la base de datos creada, deberás crear y ejecutar las migraciones. Ejecuta el comando `$ python manage.py makemigrations` este comando te creará las migraciones. Posteriormente ejecuta el comando `$ python manage.py migrate` esto hará que los modelos de datos migren a la base que creaste en el punto 1. 
-5. Por ultimo deberas ejecutar el comando `$ python manage.py runserver`.
+1. En la terminal anterior en la que gestionamos el entorno y las dependencias, dirigite al nivel del archivo `manage.py`.
+2. Luego de tener la base de datos creada, deberás crear y ejecutar las migraciones. Ejecuta el comando `$ python manage.py makemigrations` este comando te creará las migraciones. Posteriormente ejecuta el comando `$ python manage.py migrate` esto hará que los modelos de datos migren a la base que creaste en el punto 1. 
+3. Por ultimo deberas ejecutar el comando `$ python manage.py runserver`.
 
 ## ¿Cómo logro correr los tests?
 En el codigo fuente del aplicativo se construyeron unas pruebas unitarias utilizando el modulo de testing integrado en el framework django. Estas funciones automatizan las pruebas de la creacion de usuarios y la obtención de la cotización. Para correr las pruebas debe detener el servidor (Si realizó los pasos anteriores y aún sigue corriendo) con el comando `cntrl + c`, posteriormente ejecute el comando `$ python manage.py test` y logrará ver todos los tests en ejecución.
@@ -29,6 +27,7 @@ En el codigo fuente del aplicativo se construyeron unas pruebas unitarias utiliz
 <img src="https://user-images.githubusercontent.com/88569352/218375255-d9a28190-10e2-44ad-b13d-721292e46815.png" width="90">
 <img src="https://github.com/sebastiannarvaez23/window-quote-machine/assets/88569352/30b6bdc0-3bf9-4c6d-a3af-8b43ed9e27f3" width="95">
 <img src="https://github.com/sebastiannarvaez23/window-quote-machine/assets/88569352/8be2479b-f1da-4d44-a379-a2050d40ec5e" width="auto" height="80">
+<img src="https://github.com/sebastiannarvaez23/window-quote-machine/assets/88569352/d2c0832b-b7a8-4b00-9082-f0da1ab70fcd" width="auto" height="80">
 </p>
 
 ## Navegación por las interfaces
