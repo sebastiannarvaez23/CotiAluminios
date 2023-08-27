@@ -87,21 +87,18 @@ def download_quote(request):
 def getWindowStyles(request):
     styles_window = StyleWindow.objects.all()
     styles_window = list(styles_window.values())
-    print(styles_window)
     return JsonResponse({'styles_window': styles_window})
 
 @csrf_exempt
 def getAluminumFinishes(request):
     aluminum_finishes = AluminumFinishes.objects.all()
     aluminum_finishes = list(aluminum_finishes.values())
-    print(aluminum_finishes)
     return JsonResponse({'aluminum_finishes': aluminum_finishes})
 
 @csrf_exempt
 def getTypeGlass(request):
     type_glass = GlassType.objects.all()
     type_glass = list(type_glass.values())
-    print(type_glass)
     return JsonResponse({'type_glass': type_glass})
 
 @csrf_exempt
